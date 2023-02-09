@@ -10,9 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        name: Checkout
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+        name: Login to docker hub
       - run: docker build -t nisekoniawua/docker-react -f Dockerfile.dev .
+        name: Docker build
       - run: docker run -e CI=true nisekoniawua/docker-react npm test
+        name: Docker run and command to execute
 
       - name: generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
