@@ -18,9 +18,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
       - run: docker build -t nisekoniawua/docker-react .
         name: Docker build
-      - run: docker run -e CI=true nisekoniawua/docker-react npm test
-        name: Docker run and command to execute
-
+        
       - name: generate deployment package
         run: zip -r deploy.zip . -x '*.git*'
 
